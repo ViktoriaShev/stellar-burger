@@ -3,25 +3,33 @@ import ReactDOM from 'react-dom';
 
 import { TModalProps } from './type';
 import { ModalUI } from '@ui';
-
+import { getOrderDetails } from '../../services/slices/feed';
+import { useSelector } from 'react-redux';
 const modalRoot = document.getElementById('modals');
 
-export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      e.key === 'Escape' && onClose();
-    };
+export const Modal: FC<TModalProps> = memo(
+  ({ title, onClose, children, open }) => {
+    useEffect(() => {
+      const handleEsc = (e: KeyboardEvent) => {
+        e.key === 'Escape' && onClose();
+      };
 
-    document.addEventListener('keydown', handleEsc);
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-    };
-  }, [onClose]);
+      document.addEventListener('keydown', handleEsc);
+      return () => {
+        document.removeEventListener('keydown', handleEsc);
+      };
+    }, [onClose]);
 
-  return ReactDOM.createPortal(
-    <ModalUI title={title} onClose={onClose}>
-      {children}
-    </ModalUI>,
-    modalRoot as HTMLDivElement
-  );
-});
+    if (title === '') {
+      const numberOrder = '#' + useSelector(getOrderDetails)?.number;
+      title = numberOrder || '';
+    }
+
+    return ReactDOM.createPortal(
+      <ModalUI title={title} onClose={onClose} open>
+        {children}
+      </ModalUI>,
+      modalRoot as HTMLDivElement
+    );
+  }
+);

@@ -35,6 +35,19 @@ export type TOrdersData = {
 export type TUser = {
   email: string;
   name: string;
+  password: string;
 };
+
+export type TLogin = {
+  email: string;
+  password: string;
+};
+
+export const enum RequestStatus {
+  Idle = 'Idle',
+  Loading = 'Loading',
+  Success = 'Success',
+  Failed = 'Failed'
+}
 
 export type TTabMode = 'bun' | 'sauce' | 'main';

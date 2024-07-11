@@ -1,23 +1,35 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useState, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { getOrderDetails } from '../../services/slices/feed';
+import { getIngredients } from '../../services/slices/ingredients';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from 'src/services/store';
+import { getOrderByNumber } from '../../services/thunks/feed';
+import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const dispatch: AppDispatch = useDispatch();
+  const { number } = useParams<{ number: string }>();
+  const [loading, setLoading] = useState(true); // Добавлено состояние для отслеживания статуса загрузки
+  const orderData = useSelector(getOrderDetails);
+  const ingredients: TIngredient[] = useSelector(getIngredients);
 
-  const ingredients: TIngredient[] = [];
+  useEffect(() => {
+    if (number) {
+      dispatch(getOrderByNumber(parseInt(number, 10)))
+        .then(() => setLoading(false)) // Устанавливаем состояние загрузки в false после завершения загрузки данных
+        .catch(() => setLoading(false)); // Устанавливаем состояние загрузки в false в случае ошибки
+    }
+  }, [number, dispatch]);
 
-  /* Готовим данные для отображения */
+  useEffect(() => {
+    if (number) {
+      dispatch(getOrderByNumber(parseInt(number, 10)));
+    }
+  }, [number]);
+
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 
@@ -58,7 +70,9 @@ export const OrderInfo: FC = () => {
       total
     };
   }, [orderData, ingredients]);
-
+  if (loading) {
+    return <Preloader />;
+  }
   if (!orderInfo) {
     return <Preloader />;
   }

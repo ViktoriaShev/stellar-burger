@@ -1,17 +1,19 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 
-export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
-
+import { TUser } from '@utils-types';
+import { updateUser } from '../../services/thunks/user';
+import { AppDispatch } from 'src/services/store';
+import { useDispatch } from 'react-redux';
+interface UserData {
+  user: TUser;
+}
+export const Profile: FC<UserData> = ({ user }) => {
+  const dispatch: AppDispatch = useDispatch();
   const [formValue, setFormValue] = useState({
     name: user.name,
     email: user.email,
-    password: ''
+    password: user.password
   });
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    dispatch(updateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
@@ -36,7 +39,7 @@ export const Profile: FC = () => {
     setFormValue({
       name: user.name,
       email: user.email,
-      password: ''
+      password: user.password
     });
   };
 
@@ -56,6 +59,4 @@ export const Profile: FC = () => {
       handleInputChange={handleInputChange}
     />
   );
-
-  return null;
 };

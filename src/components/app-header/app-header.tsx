@@ -1,4 +1,8 @@
 import { FC } from 'react';
 import { AppHeaderUI } from '@ui';
-
-export const AppHeader: FC = () => <AppHeaderUI userName='' />;
+interface AppHeaderInterface {
+  name: string;
+}
+export const AppHeader: FC<AppHeaderInterface> = ({ name }) => (
+  <AppHeaderUI userName={name} />
+);
