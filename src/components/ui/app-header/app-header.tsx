@@ -19,9 +19,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             <p
               className={
                 location.pathname === '/'
-                  ? styles.link + ' text text_type_main-default ml-2  mr-10'
-                  : styles.link_active +
+                  ? styles.link_active +
                     ' text text_type_main-default ml-2  mr-10'
+                  : styles.link + ' text text_type_main-default ml-2  mr-10'
               }
             >
               Конструктор
@@ -34,8 +34,8 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             <p
               className={
                 location.pathname === '/feed/'
-                  ? styles.link + ' text text_type_main-default ml-2 '
-                  : styles.link_active + ' text text_type_main-default ml-2  '
+                  ? styles.link_active + ' text text_type_main-default ml-2 '
+                  : styles.link + ' text text_type_main-default ml-2  '
               }
             >
               Лента заказов
@@ -47,13 +47,13 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
         <Logo className='' />
       </div>
       <div className={styles.link_position_last}>
-        <NavLink to='/profile' className={styles.link}>
+        <NavLink to={'/profile' || '/login'} className={styles.link}>
           <ProfileIcon type={'primary'} />
           <p
             className={
-              location.pathname === '/profile'
-                ? styles.link + ' text text_type_main-default ml-2 '
-                : styles.link_active + ' text text_type_main-default ml-2  '
+              location.pathname === '/profile' || location.pathname == '/login'
+                ? styles.link_active + ' text text_type_main-default ml-2 '
+                : styles.link + ' text text_type_main-default ml-2  '
             }
           >
             {userName || 'Личный кабинет'}

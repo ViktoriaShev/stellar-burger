@@ -1,15 +1,23 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-
 import { TUser } from '@utils-types';
 import { updateUser } from '../../services/thunks/user';
 import { AppDispatch } from 'src/services/store';
 import { useDispatch } from 'react-redux';
+
 interface UserData {
-  user: TUser;
+  userState: TUser | null;
 }
-export const Profile: FC<UserData> = ({ user }) => {
+
+const initialData: TUser = {
+  name: '',
+  email: '',
+  password: ''
+};
+export const Profile: FC<UserData> = ({ userState }) => {
   const dispatch: AppDispatch = useDispatch();
+  const user = userState ? userState : initialData;
+
   const [formValue, setFormValue] = useState({
     name: user.name,
     email: user.email,

@@ -27,23 +27,13 @@ import {
 import { AppHeader, Modal, IngredientDetails, OrderInfo } from '@components';
 
 import { getIngredientsFromServer } from '../../services/thunks/ingredients';
-import {
-  checkUserAuth,
-  logUser,
-  registerUser
-} from '../../services/thunks/user';
+import { checkUserAuth, registerUser } from '../../services/thunks/user';
 
 import { AppDispatch } from '../../services/store';
 
 import { authCheck, getUser } from '../../services/slices/user';
 
-import { TUser, TLogin } from '@utils-types';
-
-const initialData: TUser = {
-  name: '',
-  email: '',
-  password: ''
-};
+import { TUser } from '@utils-types';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,29 +42,15 @@ const App = () => {
   const backgroundLocation = location.state?.background;
   const user = useSelector(getUser);
 
-  const handleRegister = (userData: TUser) => {
-    dispatch(registerUser(userData)).then(() => {
-      dispatch(checkUserAuth()).finally(() => dispatch(authCheck()));
-    });
-  };
-
-  const handleLogin = (userData: TLogin) => {
-    dispatch(logUser(userData)).then(() => {
-      dispatch(checkUserAuth()).finally(() => dispatch(authCheck()));
-    });
-  };
-
   useEffect(() => {
     dispatch(getIngredientsFromServer());
-  }, []);
-
-  useEffect(() => {
     dispatch(checkUserAuth()).finally(() => dispatch(authCheck()));
   }, [dispatch, authCheck]);
 
   const onClose = () => {
     navigate(-1);
   };
+
   return (
     <div className={styles.app}>
       <AppHeader name={user?.name || ''} />
@@ -111,7 +87,7 @@ const App = () => {
           path='/login'
           element={
             <ProtectedRoute onlyUnAuth>
-              <Login onLogin={handleLogin} />
+              <Login />
             </ProtectedRoute>
           }
         />
@@ -119,7 +95,7 @@ const App = () => {
           path='/register'
           element={
             <ProtectedRoute onlyUnAuth>
-              <Register onRegister={handleRegister} />
+              <Register />
             </ProtectedRoute>
           }
         />
@@ -143,7 +119,7 @@ const App = () => {
           path='/profile'
           element={
             <ProtectedRoute>
-              <Profile user={user !== null ? user : initialData} />
+              <Profile userState={user} />
             </ProtectedRoute>
           }
         />

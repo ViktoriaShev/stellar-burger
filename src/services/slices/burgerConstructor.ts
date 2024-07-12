@@ -54,7 +54,11 @@ export const constructorSlice = createSlice({
     selectBurgerIngredients: (state) => {
       const { bun, ingredients } = state;
       const allIngredients = [bun, ...ingredients];
+      if (bun) {
+        allIngredients.push(bun);
+      }
       const ingredientIds = allIngredients.map((ingredient) => ingredient?._id);
+
       return ingredientIds;
     }
   }

@@ -21,7 +21,11 @@ const initialState: feedType = {
 export const feedSlice = createSlice({
   name: 'feed',
   initialState,
-  reducers: {},
+  reducers: {
+    clearOrderDetails: (state: feedType) => {
+      state.orderDetails = null;
+    }
+  },
   selectors: {
     getOrdersToFeed: (state: feedType) => state.orders,
     getStatus: (state: feedType) => state.status,
@@ -73,3 +77,5 @@ export const feedSlice = createSlice({
 
 export const { getOrdersToFeed, getAllFeed, getOrderDetails } =
   feedSlice.selectors;
+
+export const { clearOrderDetails } = feedSlice.actions;

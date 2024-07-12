@@ -17,18 +17,11 @@ export const OrderInfo: FC = () => {
   const ingredients: TIngredient[] = useSelector(getIngredients);
 
   useEffect(() => {
-    if (number) {
-      dispatch(getOrderByNumber(parseInt(number, 10)))
-        .then(() => setLoading(false)) // Устанавливаем состояние загрузки в false после завершения загрузки данных
-        .catch(() => setLoading(false)); // Устанавливаем состояние загрузки в false в случае ошибки
-    }
+    if (!number) return;
+    dispatch(getOrderByNumber(parseInt(number, 10)))
+      .then(() => setLoading(false)) // Устанавливаем состояние загрузки в false после завершения загрузки данных
+      .catch(() => setLoading(false)); // Устанавливаем состояние загрузки в false в случае ошибки
   }, [number, dispatch]);
-
-  useEffect(() => {
-    if (number) {
-      dispatch(getOrderByNumber(parseInt(number, 10)));
-    }
-  }, [number]);
 
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
