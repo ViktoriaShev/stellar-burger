@@ -3,7 +3,7 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrdersToFeed } from '../../services/slices/feed';
+import { getOrdersToFeed } from '../../services/slices/feed/feed';
 import { AppDispatch } from '../../services/store';
 import { getFeedsFromServer } from '../../services/thunks/feed';
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { TUser } from '@utils-types';
 import { AppDispatch } from 'src/services/store';
 import { checkUserAuth, registerUser } from '../../services/thunks/user';
-import { authCheck } from '../../services/slices/user';
+import { authCheck } from '../../services/slices/user/user';
 
 export const Register: FC = () => {
   const dispatch: AppDispatch = useDispatch();

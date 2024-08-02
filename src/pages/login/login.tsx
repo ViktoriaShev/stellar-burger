@@ -4,7 +4,7 @@ import { TLogin } from '@utils-types';
 import { AppDispatch } from 'src/services/store';
 import { useDispatch } from 'react-redux';
 import { checkUserAuth, logUser } from '../../services/thunks/user';
-import { authCheck } from '../../services/slices/user';
+import { authCheck } from '../../services/slices/user/user';
 
 export const Login: FC = () => {
   const dispatch: AppDispatch = useDispatch();

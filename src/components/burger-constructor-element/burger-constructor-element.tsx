@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import {
   removeFromConstructor,
   reorderConstructor
-} from '../../services/slices/burgerConstructor';
+} from '../../services/slices/burgerConstructor/burgerConstructor';
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
   ({ ingredient, index, totalItems }) => {
     const dispatch = useDispatch();

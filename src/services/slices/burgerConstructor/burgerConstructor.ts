@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
-import { TConstructorIngredient } from '../../utils/types';
+import { TConstructorIngredient } from '../../../utils/types';
 
 export interface constructorSliceInterface {
   bun: TIngredient | null;
@@ -75,3 +75,5 @@ export const {
   reorderConstructor,
   resetConstructor
 } = constructorSlice.actions;
+
+export default constructorSlice;

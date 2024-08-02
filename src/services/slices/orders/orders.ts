@@ -1,6 +1,6 @@
-import { TOrder, RequestStatus } from '@utils-types';
+import { TOrder, RequestStatus } from '../../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders } from '../thunks/orders';
+import { getOrders } from '../../thunks/orders';
 
 interface ordersType {
   orders: TOrder[];
@@ -36,3 +36,4 @@ export const ordersSlice = createSlice({
 });
 
 export const { getUserOrders, getStatus } = ordersSlice.selectors;
+export default ordersSlice;

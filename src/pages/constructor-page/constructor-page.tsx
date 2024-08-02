@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getStatus } from '../../services/slices/ingredients';
+import { getStatus } from '../../services/slices/ingredients/ingredients';
 import styles from './constructor-page.module.css';
 
 import { BurgerIngredients } from '../../components';

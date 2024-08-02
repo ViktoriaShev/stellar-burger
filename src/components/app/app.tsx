@@ -27,13 +27,11 @@ import {
 import { AppHeader, Modal, IngredientDetails, OrderInfo } from '@components';
 
 import { getIngredientsFromServer } from '../../services/thunks/ingredients';
-import { checkUserAuth, registerUser } from '../../services/thunks/user';
+import { checkUserAuth } from '../../services/thunks/user';
 
 import { AppDispatch } from '../../services/store';
 
-import { authCheck, getUser } from '../../services/slices/user';
-
-import { TUser } from '@utils-types';
+import { authCheck, getUser } from '../../services/slices/user/user';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -6,7 +6,7 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngredientsFromServer } from '../../services/thunks/ingredients';
 import { AppDispatch } from '../../services/store';
-import { getIngredients } from '../../services/slices/ingredients';
+import { getIngredients } from '../../services/slices/ingredients/ingredients';
 
 export const BurgerIngredients: FC = () => {
   const ingredients = useSelector(getIngredients);

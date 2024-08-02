@@ -1,0 +1,13 @@
+{
+  "success": "true",
+  "name": "Vika",
+  "order": {
+    "_id": "1234",
+    "status": "ok",
+    "name": "spicy burger",
+    "createdAt": "02.08.2024",
+    "updatedAt": "02.08.2024",
+    "ingredients": "['buns','tomato','ketchup','cheese','onion']",
+    "number": "123456"
+  }
+}

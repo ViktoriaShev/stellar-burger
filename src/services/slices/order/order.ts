@@ -1,7 +1,7 @@
-import { RequestStatus } from '@utils-types';
-import { TOrder } from '@utils-types';
+import { RequestStatus } from '../../../utils/types';
+import { TOrder } from '../../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { postOrderBurger } from '../thunks/order';
+import { postOrderBurger } from '../../thunks/order';
 
 interface OrderData {
   info: {
@@ -46,3 +46,4 @@ export const orderSlice = createSlice({
 
 export const { getInfoOrder, getStatus, getOrder } = orderSlice.selectors;
 export const { clearData } = orderSlice.actions;
+export default orderSlice;

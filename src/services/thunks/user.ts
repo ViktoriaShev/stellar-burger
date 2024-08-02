@@ -11,8 +11,8 @@ import {
   TAuthResponse
 } from '../../utils/burger-api';
 import { setCookie } from '../../utils/cookie';
-import { TUser } from '@utils-types';
-import { userLogout } from '../slices/user';
+import { TUser } from '../../utils/types';
+import { userLogout } from '../slices/user/user';
 import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
 
