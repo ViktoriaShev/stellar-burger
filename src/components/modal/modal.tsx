@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { TModalProps } from './type';
 import { ModalUI } from '@ui';
-import { getOrderDetails } from '../../services/slices/feed';
+import { getOrderDetails } from '../../services/slices/feed/feed';
 import { useSelector } from 'react-redux';
 
 const modalRoot = document.getElementById('modals');

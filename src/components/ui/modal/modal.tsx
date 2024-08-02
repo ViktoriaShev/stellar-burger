@@ -17,7 +17,7 @@ export const ModalUI: FC<TModalUIProps> = memo(
     return (
       <>
         {isOpen && (
-          <div className={styles.modal}>
+          <div className={styles.modal} data-cy={isOpen}>
             <div className={styles.header}>
               <h3 className={`${styles.title} text text_type_main-large`}>
                 {title}

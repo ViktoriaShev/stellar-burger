@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from '@slices';
+import rootReducer from '../services/slices/rootReducer';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,

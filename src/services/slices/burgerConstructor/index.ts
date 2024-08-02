@@ -1,0 +1,1 @@
+export { constructorSlice } from './burgerConstructor';

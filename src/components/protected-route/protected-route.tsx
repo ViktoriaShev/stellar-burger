@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { userSelectors } from '../../services/slices/user';
+import { userSelectors } from '../../services/slices/user/user';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 type ProtectedRouteProps = {

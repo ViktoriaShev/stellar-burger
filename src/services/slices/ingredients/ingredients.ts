@@ -1,9 +1,9 @@
-import { RequestStatus } from '@utils-types';
-import type { TIngredient } from '@utils-types';
+import { RequestStatus } from '../../../utils/types';
+import type { TIngredient } from '../../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getIngredientsFromServer } from '../thunks/ingredients';
+import { getIngredientsFromServer } from '../../thunks/ingredients';
 
-interface IngredientsState {
+export interface IngredientsState {
   ingredients: TIngredient[];
   status: RequestStatus;
 }
@@ -36,4 +36,5 @@ export const ingredientsSlice = createSlice({
   }
 });
 export const { getIngredients, getStatus } = ingredientsSlice.selectors;
+export const ingredientsReducer = ingredientsSlice.reducer;
 export default ingredientsSlice.reducer;

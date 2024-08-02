@@ -1,4 +1,4 @@
-import { RequestStatus, TUser } from '../../utils/types';
+import { RequestStatus, TUser } from '../../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   checkUserAuth,
@@ -6,7 +6,7 @@ import {
   registerUser,
   logoutUser,
   updateUser
-} from '../thunks/user';
+} from '../../thunks/user';
 
 export interface TUserState {
   isAuthChecked: boolean;
@@ -60,30 +60,25 @@ export const userSlice = createSlice({
       })
       .addMatcher(
         (action) =>
-          [
-            checkUserAuth.rejected,
-            logUser.rejected,
-            logoutUser.rejected,
-            registerUser.rejected,
-            updateUser.rejected
-          ].includes(action.type),
-
+          action.type.endsWith('/checkUserAuth/pending') ||
+          action.type.endsWith('/logUser/pending') ||
+          action.type.endsWith('/logoutUser/pending') ||
+          action.type.endsWith('/registerUser/pending') ||
+          action.type.endsWith('/updateUser/pending'),
         (state) => {
-          state.requestStatus = RequestStatus.Failed;
+          state.requestStatus = RequestStatus.Loading;
         }
       )
       .addMatcher(
         (action) =>
-          [
-            checkUserAuth.pending,
-            logUser.pending,
-            logoutUser.pending,
-            registerUser.pending,
-            updateUser.pending
-          ].includes(action.type),
+          action.type.endsWith('/checkUserAuth/rejected') ||
+          action.type.endsWith('/logUser/rejected') ||
+          action.type.endsWith('/logoutUser/rejected') ||
+          action.type.endsWith('/registerUser/rejected') ||
+          action.type.endsWith('/updateUser/rejected'),
 
         (state) => {
-          state.requestStatus = RequestStatus.Loading;
+          state.requestStatus = RequestStatus.Failed;
         }
       );
   }
@@ -93,4 +88,4 @@ export const { authCheck, userLogout } = userSlice.actions;
 export const { getUser, getIsAuthCheched } = userSlice.selectors;
 export const userSelectors = userSlice.selectors;
 
-export default userSlice.reducer;
+export default userSlice;

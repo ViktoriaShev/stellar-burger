@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getFeedsFromServer, getOrderByNumber } from '../thunks/feed';
-import { TOrder, RequestStatus } from '@utils-types';
+import { getFeedsFromServer, getOrderByNumber } from '../../thunks/feed';
+import { TOrder, RequestStatus } from '../../../utils/types';
 
 interface feedType {
   orders: TOrder[];
@@ -54,28 +54,26 @@ export const feedSlice = createSlice({
       )
       .addMatcher(
         (action) =>
-          [getFeedsFromServer.rejected, getOrderByNumber.rejected].includes(
-            action.type
-          ),
-
+          action.type.endsWith('/getOrder/pending') ||
+          action.type.endsWith('/getFeeds/pending'),
         (state) => {
-          state.status = RequestStatus.Failed;
+          state.status = RequestStatus.Loading;
         }
       )
       .addMatcher(
         (action) =>
-          [getFeedsFromServer.pending, getOrderByNumber.pending].includes(
-            action.type
-          ),
+          action.type.endsWith('/getOrder/rejected') ||
+          action.type.endsWith('/getFeeds/rejected'),
 
         (state) => {
-          state.status = RequestStatus.Loading;
+          state.status = RequestStatus.Failed;
         }
       );
   }
 });
 
-export const { getOrdersToFeed, getAllFeed, getOrderDetails } =
+export const { getOrdersToFeed, getAllFeed, getOrderDetails, getStatus } =
   feedSlice.selectors;
 
 export const { clearOrderDetails } = feedSlice.actions;
+export default feedSlice;

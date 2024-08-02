@@ -6,12 +6,12 @@ import {
   getConstructorItems,
   selectBurgerIngredients,
   resetConstructor
-} from '../../services/slices/burgerConstructor';
+} from '../../services/slices/burgerConstructor/burgerConstructor';
 import { postOrderBurger } from '../../services/thunks/order';
 import { AppDispatch } from '../../services/store';
-import { getOrder, clearData } from '../../services/slices/order';
+import { getOrder, clearData } from '../../services/slices/order/order';
 import { Modal } from '@components';
-import { getUser } from '../../services/slices/user';
+import { getUser } from '../../services/slices/user/user';
 import { NavLink } from 'react-router-dom';
 import styles from '../ui/app-header/app-header.module.css';
 
